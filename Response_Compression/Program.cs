@@ -5,16 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container. 
 
 //Response Compression
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true; 
-    //options.Providers.Add<GzipCompressionProvider>();
-});
-builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-{
-    options.Level = CompressionLevel.Fastest;
-});
-
+ services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true; // HTTPS'de sıkıştırmayı etkinleştir
+        options.Providers.Add<BrotliCompressionProvider>();
+        options.Providers.Add<GzipCompressionProvider>();
+    });
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
