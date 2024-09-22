@@ -3,17 +3,19 @@ using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container. 
+
+//Response Compression
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true; 
     //options.Providers.Add<GzipCompressionProvider>();
 });
-
 builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
 {
     options.Level = CompressionLevel.Fastest;
 });
- 
+
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseResponseCompression();
