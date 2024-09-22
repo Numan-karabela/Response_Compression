@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-
+// Add services to the container. 
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true; 
@@ -17,9 +14,7 @@ builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
     options.Level = CompressionLevel.Fastest;
 });
  
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 app.UseResponseCompression();
 app.UseHttpsRedirection();
